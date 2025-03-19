@@ -29,11 +29,6 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public SpringSecurityDialect getSpringSecurityDialect() {
-        return new SpringSecurityDialect();
-    }
-
-    @Bean
     public SecurityFilterChain configureFilterChain(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests(auth -> auth
@@ -41,7 +36,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user").hasAnyRole("USER", "ADMIN")
                         .anyRequest().authenticated())
-                .csrf(AbstractHttpConfigurer::disable)
+//                .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(form -> form.loginPage("/login"))
 
                 .formLogin(login -> login.successHandler((request,
